@@ -93,7 +93,12 @@
     }
   };
   function getGists() {
-    getCachedJSON('https://api.github.com/users/davidthewatson/gists',
+    var url = 'https://api.github.com/users/davidthewatson/gists';
+    var user = Arg("user");
+    if (user) {
+      url = 'https://api.github.com/users/' + user + '/gists';
+    }
+    getCachedJSON(url,
     function (data) {
       $.each(data, function (i, item) {
         filename = Object.keys(item.files)[0];
