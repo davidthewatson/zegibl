@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>zegibl</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="simplegrid.css" />
+  <style>
+  .content {
+    padding: 10px;
+  }
+  </style>
+</head>
+<body>
+  <div class="grid grid-pad">
+    <div class="col-1-1">
+      <div class="content">
+        <h2 id="title">Blog</h2>
+        <div id="posts">
+        </div>
+    </div>
+    </div>
+  </div>
+  <script src="zepto.min.js"></script>
+  <script src="arg-1.2.min.js"></script>
+  <script src="marked.min.js"></script>
+  <script>
+  String.prototype.toProperCase = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  };
+  var getCachedJSON = function (url, callback) {
+    var cachedData = window.localStorage[url];
+    if (cachedData) {
+      console.log('Data already cached, returning from cache:', url);
+      callback(JSON.parse(cachedData));
+    } else {
+      $.getJSON(url, function (data) {
+        console.log('Fetched data, saving to cache:', url);
+        window.localStorage[url] = JSON.stringify(data);
+        callback(data);
+      });
+    }
+  };
+  function getGists() {
+    getCachedJSON('https://api.github.com/users/davidthewatson/gists',
+    function (data) {
+      $.each(data, function (i, item) {
+        filename = Object.keys(item.files)[0];
+        language = item.files[filename].language;
+        if (language == 'HTML' || language == 'Markdown') {
+          raw_url = item.files[filename].raw_url;
+          title = filename.slice(0,filename.indexOf('.')).replace(/_/g, ' ').toProperCase();
+          tr = $('<p><a href="post.html?url=' + raw_url + '&title=' + title + '&filename=' + filename + '")">' + title + '</a></p>');
+          $("#posts").append(tr);
+        }
+      });
+    });
+  }
+  getGists();
+  </script>
+</body>
+</html>
