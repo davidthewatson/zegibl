@@ -23,7 +23,13 @@
       <div class="content">
         <h2>Why ZeGiBl?</h2>
         <p>
-          ZeGiBl (sounds like <em>legible</em>) is a portmanteau of ZeptoJS, Gist, and Blog. ZeGiBl enables
+          ZeGiBl (sounds like <em>legible</em>) is a portmanteau of ZeptoJS,
+          Gist, and Blog that was inspired by my work on
+          <a href="http://davidwatson.org/flasgist/">flasgist</a>
+          several years ago. Flasgist worked great, but it suffered
+          from performance problems because of the server-to-server
+          latency and rate limits in Github's API. ZeGiBl solves these problems by
+          deferring all Github API communication to client-side JavaScript which enables
           you to deploy a blog without having to deploy any backend web server.
           ZeGiBl relies on Github Gists for CRUD actions on blog posts and relies
           on client-side JavaScript to render a list of blog posts and individual
