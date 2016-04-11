@@ -1,6 +1,6 @@
 # ZeGiBl
 
-ZeGiBl (sounds like legible) is a portmanteau of ZeptoJS, Gist, and Blog. ZeGiBl relies on Github Gists for CRUD actions on blog posts and relies on client-side JavaScript to render gists. ZeGiBl uses Github Gists for data storage, zeptojs as a lightweight jquery surrogate, markedjs for parsing markdown, and argjs for parsing URL query arguments.
+ZeGiBl (sounds like legible) is a portmanteau of ZeptoJS, Gist, and Blog. ZeGiBl relies on Github Gists for CRUD actions on blog posts and relies on client-side JavaScript to render gists. ZeGiBl uses Github Gists for data storage, zeptojs as a lightweight jquery surrogate, and markedjs for parsing markdown.
 
 <a href="http://davidwatson.org/zegibl/">ZeGiBl</a>
 
