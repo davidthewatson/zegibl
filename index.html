@@ -1,14 +1,40 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>ZeGiBl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" >
+  <title>davidwatson.org</title>
   <meta charset="utf-8" />
   <link rel="stylesheet" type="text/css" href="simplegrid.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <script src="/page.js"></script>
+  <script src="zegibl-index.js"></script>
+  <script src="zegibl-post.js"></script>
+  <script src="zepto.min.js"></script>
+  <script src="marked.min.js"></script>
+
+  <script>
+       page('/', index);
+       page('/#', index);
+       page();
+       function index(ctx) {
+           if (ctx.hash == "") {
+               $("#posts").html(null);
+               $("#title").html('davidwatson.org');
+               getGists();
+           }
+           else {
+               getGist(ctx.hash);
+           }
+       }
+     </script>
   <style>
   .content {
     padding: 10px;
     font-family: Sans-Serif;
   }
+ #links a {
+     padding: 10px;
+ }
   dl>dt {
     font-weight: bold;
   }
@@ -21,60 +47,29 @@
   <div class="grid grid-pad">
     <div class="col-1-1">
       <div class="content">
-        <h2>Why ZeGiBl?</h2>
-        <p>
-          ZeGiBl (sounds like <em>legible</em>) is a portmanteau of ZeptoJS,
-          Gist, and Blog that was inspired by my work on
-          <a href="http://davidwatson.org/flasgist/">flasgist</a>
-          several years ago. Flasgist worked great, but it suffered
-          from performance problems because of the server-to-server
-          latency and rate limits in Github's API. ZeGiBl solves these problems by
-          deferring all Github API communication to client-side JavaScript which enables
-          you to deploy a blog without having to deploy any backend web server.
-          ZeGiBl relies on Github Gists for CRUD actions on blog posts and relies
-          on client-side JavaScript to render a list of blog posts and individual
-          blog posts. ZeGiBl uses Github Gists for data storage, zeptojs as a
-          lightweight jquery surrogate, markedjs for parsing markdown, and argjs
-          for parsing URL query arguments.
-        </p>
-        <h2>How does ZeGiBl work?</h2>
-        <p>The <a href="#posts">list of posts below</a> is generated when the JS in this page reads
-          <a href="https://api.github.com/users/davidthewatson/gists">
-            JSON returned from an HTTP GET request against the Gist API on Github</a>
-          for the user account davidthewatson. A click on any link in
-          the list below simply requests another static HTML page
-          passing the JSON parameters for that Gist as query parameters. The post page
-          simply reads those parameters, loads the markdown for that post, parses it,
-          and renders the page.
-        </p>
-        <h2 id="title">What does ZeGiBl look like?</h2>
+        <h2 id="title">davidwatson.org</h2>
+        <hr>
         <div id="posts">
         </div>
-        <h2>Where can I deploy ZeGiBl?</h2>
-      <p>You can deploy ZeGiBl anywhere you can deploy a static HTML web page.
-      This includes Github Pages, Google Pages, Heroku, your own web server, or a
-      file on your computer.</p>
-      <h2>How do I get started with ZeGiBl</h2>
-      <h3>Using a file on your computer</h3>
-      <ol>
-        <li>Login to Github or <a href="https://github.com/">signup for Github</a> if you don't have an account
-        <li>Goto <a href="https://gist.github.com/">Github Gists</a> and make sure that you have at least one public gist with a .md or .html extension</li>
-        <li>Download and unzip <a href="https://github.com/davidthewatson/zegibl/archive/master.zip">the ZeGiBl code</a></li>
-        <li>Edit the index.html file and replace <em>davidthewatson</em> with your Github username and save the file</li>
-        <li>Load the file in your browser. On Mac OS X, this is as simple as <em>open index.html</em></li>
-      </ol>
-      <p>Your public gists with an .md extension should appear under
-        <a href="#posts">What Does ZeGiBl look like?</a>. If not, look for any errors in the browser's JavaScript console.</p>
-        <p>You can now style to suit, or just deploy all of the files in the directory as is to any static web server.</p>
-      <h3>Using Github Pages</h3>
-<p>Coming Soon!</p>
-<p>Fork or clone <a href="https://github.com/davidthewatson/zegibl">ZeGiBl</a>.</p>
-    </div>
+        <hr>
+        <div class="push-right">
+            <div id="links">
+                <a href="https://twitter.com/davidthewatson"><i class="fa fa-twitter fa-lg"></i></a>
+                <a href="https://www.linkedin.com/in/davidthewatson"><i class="fa fa-linkedin fa-lg"></i></a>
+                <a href="mailto:david@davidwatson.org"><i class="fa fa-envelope-o fa-lg"></i></a>
+            </div>
+        </div>
     </div>
   </div>
-  <script src="zepto.min.js"></script>
-  <script src="arg-1.2.min.js"></script>
-  <script src="marked.min.js"></script>
-  <script src="zegibl-index.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-35841682-1', 'auto');
+    ga('send', 'pageview');
+
+    </script>
 </body>
 </html>
